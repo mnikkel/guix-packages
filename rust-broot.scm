@@ -346,7 +346,7 @@
 (define-public rust-termimad-0.11
   (package
     (name "rust-termimad")
-    (version "0.11.0")
+    (version "0.11.1")
     (source
       (origin
         (method url-fetch)
@@ -355,7 +355,7 @@
           (string-append name "-" version ".tar.gz"))
         (sha256
           (base32
-            "1l4wvy7gl5pp8w1rzz99g29xbsmyl95rhbq5har6mkk4jidzdxga"))))
+            "16y0n9kfbzvbq1abmnjfksb4gklzyv9q6w4y1h1jmkl4269djwrd"))))
     (build-system cargo-build-system)
     (arguments
       `(#:skip-build?
@@ -491,7 +491,7 @@
 (define-public rust-lfs-core-0.3
   (package
     (name "rust-lfs-core")
-    (version "0.3.1")
+    (version "0.3.4")
     (source
       (origin
         (method url-fetch)
@@ -500,7 +500,7 @@
           (string-append name "-" version ".tar.gz"))
         (sha256
           (base32
-            "1ajwr63n8yg8p9qbsw8yvymgllihg3rqqdhrvlkl62mg57888kpp"))))
+            "07l0cd85l70fkf1009lqa7129329g22i32sq8xzvnp4sr6zmj5xz"))))
     (build-system cargo-build-system)
     (arguments
       `(#:skip-build?
@@ -647,7 +647,7 @@ finite automata and guarantees linear time matching on all inputs.
 (define-public rust-lazy-regex-proc-macros-2
   (package
     (name "rust-lazy-regex-proc-macros")
-    (version "2.1.0")
+    (version "2.2.1")
     (source
       (origin
         (method url-fetch)
@@ -656,7 +656,7 @@ finite automata and guarantees linear time matching on all inputs.
           (string-append name "-" version ".tar.gz"))
         (sha256
           (base32
-            "13ac6vz5rq1pfg1jv2hbp1qviw7ax3rzshi3w47nyad1pqdk4vyd"))))
+            "0kpqhhs2p9zn2q4cfjz30vkwgl4znwapwlj057i5pkwj3f5r64kc"))))
     (build-system cargo-build-system)
     (arguments
       `(#:skip-build?
@@ -675,7 +675,7 @@ finite automata and guarantees linear time matching on all inputs.
 (define-public rust-lazy-regex-2
   (package
     (name "rust-lazy-regex")
-    (version "2.1.0")
+    (version "2.2.1")
     (source
       (origin
         (method url-fetch)
@@ -684,7 +684,7 @@ finite automata and guarantees linear time matching on all inputs.
           (string-append name "-" version ".tar.gz"))
         (sha256
           (base32
-            "07n4zz4fwlf8821mrncngax5s7z1pxwp0z4ly3wfsyywv3jg603v"))))
+            "0m2anc6knp9dndkyqqf7bd7dly7p3is5vgf0ln4fgxkj2bwril8p"))))
     (build-system cargo-build-system)
     (arguments
       `(#:skip-build?
@@ -1200,10 +1200,10 @@ at once.  The reader internally keeps track of position within the buffer.
       "Fowlerâ\x80\x93Nollâ\x80\x93Vo hash function")
     (license (list license:asl2.0 license:expat))))
 
-(define-public rust-deser-hjson-0.1
+(define-public rust-deser-hjson-1
   (package
     (name "rust-deser-hjson")
-    (version "0.1.13")
+    (version "1.0.1")
     (source
       (origin
         (method url-fetch)
@@ -1212,7 +1212,7 @@ at once.  The reader internally keeps track of position within the buffer.
           (string-append name "-" version ".tar.gz"))
         (sha256
           (base32
-            "1wp05allbw2nw9swnl6xf1ddg678sslz3gxjns35zr5j64q8yjvl"))))
+            "15p8y312kkll1jl17hyfjp8ww8cp1vilr0anrh8bn4azzgj76adz"))))
     (build-system cargo-build-system)
     (arguments
       `(#:skip-build?
@@ -1511,53 +1511,10 @@ at once.  The reader internally keeps track of position within the buffer.
       "This package provides a non-cryptographic hash function using AES-NI for high performance")
     (license (list license:expat license:asl2.0))))
 
-(define-public rust-syntect-5
-  (package
-    (name "rust-syntect")
-    (version "4.5.0")
-    (source
-     (origin
-       (method url-fetch)
-       (uri (crate-uri "syntect" version))
-       (file-name
-        (string-append name "-" version ".tar.gz"))
-       (sha256
-        (base32 "1r9ij3qmq4cs83jwpk1043sai1dwdghb8lwkm34rs12d7frc5yib"))))
-    (build-system cargo-build-system)
-    (arguments
-     `(#:tests? #f                      ;missing files
-       #:rust ,rust-1.46
-       #:cargo-inputs
-       (("rust-bincode" ,rust-bincode-1)
-        ("rust-bitflags" ,rust-bitflags-1)
-        ("rust-fancy-regex" ,rust-fancy-regex-0.3)
-        ("rust-flate2" ,rust-flate2-1)
-        ("rust-fnv" ,rust-fnv-1)
-        ("rust-lazy-static" ,rust-lazy-static-1)
-        ("rust-lazycell" ,rust-lazycell-1)
-        ("rust-onig" ,rust-onig-6)
-        ("rust-plist" ,rust-plist-1)
-        ("rust-regex-syntax" ,rust-regex-syntax-0.6)
-        ("rust-serde" ,rust-serde-1)
-        ("rust-serde-derive" ,rust-serde-derive-1)
-        ("rust-serde-json" ,rust-serde-json-1)
-        ("rust-walkdir" ,rust-walkdir-2)
-        ("rust-yaml-rust" ,rust-yaml-rust-0.4))
-       #:cargo-development-inputs
-       (("rust-criterion" ,rust-criterion-0.3)
-        ("rust-getopts" ,rust-getopts-0.2)
-        ("rust-pretty-assertions" ,rust-pretty-assertions-0.6))))
-    (home-page "https://github.com/trishume/syntect")
-    (synopsis "Library for syntax highlighting and code intelligence")
-    (description
-     "This package provides a library for syntax highlighting and code
-intelligence using Sublime Text's grammars.")
-    (license license:expat)))
-
 (define-public rust-broot-1
   (package
     (name "rust-broot")
-    (version "1.5.0")
+    (version "1.6.0")
     (source
       (origin
         (method url-fetch)
@@ -1566,7 +1523,7 @@ intelligence using Sublime Text's grammars.")
           (string-append name "-" version ".tar.gz"))
         (sha256
           (base32
-            "0kz73xzy7knwfxc7yq42s3fx1y7d29dx114ap1bmn0ys640w9vsy"))))
+            "19g9r1d3csff9qwhz7dqwc3r5rnnacaiycilzp83iv8n00sf0yx5"))))
     (build-system cargo-build-system)
     (arguments
      `(#:rust ,rust-1.50
@@ -1583,7 +1540,7 @@ intelligence using Sublime Text's grammars.")
          ("rust-crossbeam" ,rust-crossbeam-0.8)
          ("rust-crossterm" ,rust-crossterm-0.19)
          ("rust-custom-error" ,rust-custom-error-1)
-         ("rust-deser-hjson" ,rust-deser-hjson-0.1)
+         ("rust-deser-hjson" ,rust-deser-hjson-1)
          ("rust-directories" ,rust-directories-3)
          ("rust-file-size" ,rust-file-size-1)
          ("rust-fnv" ,rust-fnv-1)
