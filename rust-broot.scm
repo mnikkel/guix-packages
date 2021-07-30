@@ -140,7 +140,7 @@
 (define-public rust-argh-shared-0.1
   (package
     (name "rust-argh-shared")
-    (version "0.1.4")
+    (version "0.1.5")
     (source
       (origin
         (method url-fetch)
@@ -149,7 +149,7 @@
           (string-append name "-" version ".tar.gz"))
         (sha256
           (base32
-            "1cacdyl980sarjfx32v6d57snk76c7dvak3mp7fvlvc2r5n367vq"))))
+            "006aa509w15dyhbkr5bxicbfkfz61q9i57ybcb8ibx5qkh0ynqca"))))
     (build-system cargo-build-system)
     (arguments `(#:skip-build? #t))
     (home-page "https://github.com/google/argh")
@@ -162,7 +162,7 @@
 (define-public rust-argh-derive-0.1
   (package
     (name "rust-argh-derive")
-    (version "0.1.4")
+    (version "0.1.5")
     (source
       (origin
         (method url-fetch)
@@ -171,7 +171,7 @@
           (string-append name "-" version ".tar.gz"))
         (sha256
           (base32
-            "0rxhd359d4gpac9524xx8qz13wiq3vilqnn95m0pgm0a2860rsy4"))))
+            "0g4d7fcbz963r9rzdv9p28n41b52rfq38i1m5r2fjlak6x19r530"))))
     (build-system cargo-build-system)
     (arguments
       `(#:skip-build?
@@ -192,7 +192,7 @@
 (define-public rust-argh-0.1
   (package
     (name "rust-argh")
-    (version "0.1.4")
+    (version "0.1.5")
     (source
       (origin
         (method url-fetch)
@@ -201,7 +201,7 @@
           (string-append name "-" version ".tar.gz"))
         (sha256
           (base32
-            "1gi2qp6mfc9gz2sy3w1fq8fpz3d1bvx1gmmiryicgkc7iw42yyci"))))
+            "0gij9511j75wkvilhw2nq8d81an6c9pbnwlyilkwa5xw96jifwrf"))))
     (build-system cargo-build-system)
     (arguments
       `(#:skip-build?
@@ -419,7 +419,7 @@
 (define-public rust-secular-1
   (package
     (name "rust-secular")
-    (version "1.0.0")
+    (version "1.0.1")
     (source
       (origin
         (method url-fetch)
@@ -428,7 +428,7 @@
           (string-append name "-" version ".tar.gz"))
         (sha256
           (base32
-            "01cr44pzj1zpxajrls702l177irdarn0bp8fz6x399iw896avjd4"))))
+            "1davw8k29sycm7f4674d4m44jfa7pn812jm3m3mm76srvz63xp63"))))
     (build-system cargo-build-system)
     (arguments
       `(#:skip-build?
@@ -506,143 +506,13 @@
       `(#:skip-build?
         #t
         #:cargo-inputs
-        (("rust-libc" ,rust-libc-0.2)
+        (("rust-lazy-regex" ,rust-lazy-regex-2)
+         ("rust-libc" ,rust-libc-0.2)
          ("rust-thiserror" ,rust-thiserror-1))))
     (home-page "https://github.com/Canop/lfs-core")
     (synopsis "give information on mounted disks")
     (description "give information on mounted disks")
     (license license:expat)))
-
-(define-public rust-once-cell-1
-  (package
-    (name "rust-once-cell")
-    (version "1.7.2")
-    (source
-      (origin
-        (method url-fetch)
-        (uri (crate-uri "once_cell" version))
-        (file-name
-          (string-append name "-" version ".tar.gz"))
-        (sha256
-          (base32
-            "18qmpyfigg4ibdhjy5mwcjhzk9adwlgfaqv7nj430ivm86q0i2xg"))))
-    (build-system cargo-build-system)
-    (arguments
-      `(#:skip-build?
-        #t
-        #:cargo-inputs
-        (("rust-parking-lot" ,rust-parking-lot-0.11))))
-    (home-page
-      "https://github.com/matklad/once_cell")
-    (synopsis
-      "Single assignment cells and lazy values.")
-    (description
-      "Single assignment cells and lazy values.")
-    (license (list license:expat license:asl2.0))))
-
-(define-public rust-regex-syntax-0.6
-  (package
-    (name "rust-regex-syntax")
-    (version "0.6.25")
-    (source
-      (origin
-        (method url-fetch)
-        (uri (crate-uri "regex-syntax" version))
-        (file-name
-          (string-append name "-" version ".tar.gz"))
-        (sha256
-          (base32
-            "16y87hz1bxmmz6kk360cxwfm3jnbsxb3x4zw9x1gzz7khic2i5zl"))))
-    (build-system cargo-build-system)
-    (arguments `(#:skip-build? #t))
-    (home-page "https://github.com/rust-lang/regex")
-    (synopsis "A regular expression parser.")
-    (description
-      "This package provides a regular expression parser.")
-    (license (list license:expat license:asl2.0))))
-
-(define-public rust-memchr-2
-  (package
-    (name "rust-memchr")
-    (version "2.4.0")
-    (source
-      (origin
-        (method url-fetch)
-        (uri (crate-uri "memchr" version))
-        (file-name
-          (string-append name "-" version ".tar.gz"))
-        (sha256
-          (base32
-            "1p478fqf4nia2ma0kv4npb8x1hli0zz6k16517ikb51jkryx8sxi"))))
-    (build-system cargo-build-system)
-    (arguments
-      `(#:skip-build?
-        #t
-        #:cargo-inputs
-        (("rust-libc" ,rust-libc-0.2))))
-    (home-page
-      "https://github.com/BurntSushi/rust-memchr")
-    (synopsis "Safe interface to memchr.")
-    (description "Safe interface to memchr.")
-    (license (list license:unlicense license:expat))))
-
-(define-public rust-aho-corasick-0.7
-  (package
-    (name "rust-aho-corasick")
-    (version "0.7.18")
-    (source
-      (origin
-        (method url-fetch)
-        (uri (crate-uri "aho-corasick" version))
-        (file-name
-          (string-append name "-" version ".tar.gz"))
-        (sha256
-          (base32
-            "0vv50b3nvkhyy7x7ip19qnsq11bqlnffkmj2yx2xlyk5wzawydqy"))))
-    (build-system cargo-build-system)
-    (arguments
-      `(#:skip-build?
-        #t
-        #:cargo-inputs
-        (("rust-memchr" ,rust-memchr-2))))
-    (home-page
-      "https://github.com/BurntSushi/aho-corasick")
-    (synopsis "Fast multiple substring searching.")
-    (description
-      "Fast multiple substring searching.")
-    (license (list license:unlicense license:expat))))
-
-(define-public rust-regex-1
-  (package
-    (name "rust-regex")
-    (version "1.5.4")
-    (source
-      (origin
-        (method url-fetch)
-        (uri (crate-uri "regex" version))
-        (file-name
-          (string-append name "-" version ".tar.gz"))
-        (sha256
-          (base32
-            "0qf479kjbmb582h4d1d6gfl75h0j8aq2nrdi5wg6zdcy6llqcynh"))))
-    (build-system cargo-build-system)
-    (arguments
-      `(#:skip-build?
-        #t
-        #:cargo-inputs
-        (("rust-aho-corasick" ,rust-aho-corasick-0.7)
-         ("rust-memchr" ,rust-memchr-2)
-         ("rust-regex-syntax" ,rust-regex-syntax-0.6))))
-    (home-page "https://github.com/rust-lang/regex")
-    (synopsis
-      "An implementation of regular expressions for Rust. This implementation uses
-finite automata and guarantees linear time matching on all inputs.
-")
-    (description
-      "An implementation of regular expressions for Rust.  This implementation uses
-finite automata and guarantees linear time matching on all inputs.
-")
-    (license (list license:expat license:asl2.0))))
 
 (define-public rust-lazy-regex-proc-macros-2
   (package
@@ -701,6 +571,33 @@ finite automata and guarantees linear time matching on all inputs.
       "lazy static regular expressions checked at compile time")
     (license license:expat)))
 
+(define-public rust-is-executable-0.1
+  (package
+    (name "rust-is-executable")
+    (version "0.1.2")
+    (source
+      (origin
+        (method url-fetch)
+        (uri (crate-uri "is_executable" version))
+        (file-name
+          (string-append name "-" version ".tar.gz"))
+        (sha256
+          (base32
+            "0xy516afjh79a0d53j9v4w5mgi2s0r6f6qynnyz8g0dwi8xmab9h"))))
+    (build-system cargo-build-system)
+    (arguments
+      `(#:skip-build?
+        #t
+        #:cargo-inputs
+        (("rust-winapi" ,rust-winapi-0.3))))
+    (home-page
+      "https://github.com/fitzgen/is_executable")
+    (synopsis
+      "Is there an executable file at the given path?")
+    (description
+      "Is there an executable file at the given path?")
+    (license (list license:asl2.0 license:expat))))
+
 (define-public rust-fallible-collections-0.3
   (package
     (name "rust-fallible-collections")
@@ -726,40 +623,6 @@ finite automata and guarantees linear time matching on all inputs.
       "a crate which adds fallible allocation api to std collections")
     (description
       "a crate which adds fallible allocation api to std collections")
-    (license (list license:expat license:asl2.0))))
-
-(define-public rust-bitreader-0.3
-  (package
-    (name "rust-bitreader")
-    (version "0.3.4")
-    (source
-      (origin
-        (method url-fetch)
-        (uri (crate-uri "bitreader" version))
-        (file-name
-          (string-append name "-" version ".tar.gz"))
-        (sha256
-          (base32
-            "06wlzf8ra7k8ya0m71dq0kxbaalaan48dymairn9q8s4gld1hy4i"))))
-    (build-system cargo-build-system)
-    (arguments
-      `(#:skip-build?
-        #t
-        #:cargo-inputs
-        (("rust-cfg-if" ,rust-cfg-if-1))))
-    (home-page "https://github.com/irauta/bitreader")
-    (synopsis
-      "BitReader helps reading individual bits from a slice of bytes.
-
-You can read \"unusual\" numbers of bits from the byte slice, for example 13 bits
-at once. The reader internally keeps track of position within the buffer.
-")
-    (description
-      "BitReader helps reading individual bits from a slice of bytes.
-
-You can read \"unusual\" numbers of bits from the byte slice, for example 13 bits
-at once.  The reader internally keeps track of position within the buffer.
-")
     (license (list license:expat license:asl2.0))))
 
 (define-public rust-mp4parse-0.11
@@ -850,10 +713,10 @@ at once.  The reader internally keeps track of position within the buffer.
       "a library to perform image color model conversion")
     (license license:expat)))
 
-(define-public rust-strum-macros-0.20
+(define-public rust-strum-macros-0.21
   (package
     (name "rust-strum-macros")
-    (version "0.20.1")
+    (version "0.21.1")
     (source
       (origin
         (method url-fetch)
@@ -862,7 +725,7 @@ at once.  The reader internally keeps track of position within the buffer.
           (string-append name "-" version ".tar.gz"))
         (sha256
           (base32
-            "0j9ikvxlqzr667ghc045qkpwprjgcfmzgagln7maw4jigawcd2zf"))))
+            "1v55b1in7dn07s6vxr8dajqpvxkxjbfq6qamnjgcbnq9x3pawsnh"))))
     (build-system cargo-build-system)
     (arguments
       `(#:skip-build?
@@ -880,10 +743,10 @@ at once.  The reader internally keeps track of position within the buffer.
       "Helpful macros for working with enums and strings")
     (license license:expat)))
 
-(define-public rust-strum-0.20
+(define-public rust-strum-0.21
   (package
     (name "rust-strum")
-    (version "0.20.0")
+    (version "0.21.0")
     (source
       (origin
         (method url-fetch)
@@ -892,13 +755,13 @@ at once.  The reader internally keeps track of position within the buffer.
           (string-append name "-" version ".tar.gz"))
         (sha256
           (base32
-            "0p5cslmdnz261kiwmm4h7qsmv9bh83r0f9lq6f2z2mxsnl4wa63k"))))
+            "1qnd2by1zrwgx7li0hmwy7jbzjwz1ky697qjg85nga8zzny6py5a"))))
     (build-system cargo-build-system)
     (arguments
       `(#:skip-build?
         #t
         #:cargo-inputs
-        (("rust-strum-macros" ,rust-strum-macros-0.20))))
+        (("rust-strum-macros" ,rust-strum-macros-0.21))))
     (home-page
       "https://github.com/Peternator7/strum")
     (synopsis
@@ -907,10 +770,10 @@ at once.  The reader internally keeps track of position within the buffer.
       "Helpful macros for working with enums and strings")
     (license license:expat)))
 
-(define-public rust-target-lexicon-0.11
+(define-public rust-target-lexicon-0.12
   (package
     (name "rust-target-lexicon")
-    (version "0.11.3")
+    (version "0.12.1")
     (source
       (origin
         (method url-fetch)
@@ -919,7 +782,7 @@ at once.  The reader internally keeps track of position within the buffer.
           (string-append name "-" version ".tar.gz"))
         (sha256
           (base32
-            "0khq669rji1l0liv9mdxvddklqhxxpk6r06wbdhc18hiilw9xck2"))))
+            "1yx646j9nj4hjhza6lvbj192g7idbxn9zdr2xplha40jqjj2srdh"))))
     (build-system cargo-build-system)
     (arguments `(#:skip-build? #t))
     (home-page
@@ -930,10 +793,10 @@ at once.  The reader internally keeps track of position within the buffer.
       "Targeting utilities for compilers and related tools")
     (license license:asl2.0 )))
 
-(define-public rust-cfg-expr-0.7
+(define-public rust-cfg-expr-0.8
   (package
     (name "rust-cfg-expr")
-    (version "0.7.4")
+    (version "0.8.0")
     (source
       (origin
         (method url-fetch)
@@ -942,14 +805,14 @@ at once.  The reader internally keeps track of position within the buffer.
           (string-append name "-" version ".tar.gz"))
         (sha256
           (base32
-            "0sn2mw7s2i9qr5mrbyarz0mn5vb3iv6z656va6sccf5qzcprxaih"))))
+            "152z106dfranvqalpd51apc9rv7zkd5g0pdbr925vpdvcqkx38bh"))))
     (build-system cargo-build-system)
     (arguments
       `(#:skip-build?
         #t
         #:cargo-inputs
         (("rust-smallvec" ,rust-smallvec-1)
-         ("rust-target-lexicon" ,rust-target-lexicon-0.11))))
+         ("rust-target-lexicon" ,rust-target-lexicon-0.12))))
     (home-page
       "https://github.com/EmbarkStudios/cfg-expr")
     (synopsis
@@ -961,7 +824,7 @@ at once.  The reader internally keeps track of position within the buffer.
 (define-public rust-system-deps-3
   (package
     (name "rust-system-deps")
-    (version "3.1.1")
+    (version "3.2.0")
     (source
       (origin
         (method url-fetch)
@@ -970,23 +833,22 @@ at once.  The reader internally keeps track of position within the buffer.
           (string-append name "-" version ".tar.gz"))
         (sha256
           (base32
-            "0w7avfcqdp6wkix8yhfk4wpbr9z9x7507l54crqc06mwsxx10j62"))))
+            "19ig3hxgyq9d7qy8cwpl74l75ay2w0y0a4rginqb68h7hygjc328"))))
     (build-system cargo-build-system)
     (arguments
       `(#:skip-build?
         #t
         #:cargo-inputs
         (("rust-anyhow" ,rust-anyhow-1)
-         ("rust-cfg-expr" ,rust-cfg-expr-0.7)
+         ("rust-cfg-expr" ,rust-cfg-expr-0.8)
          ("rust-heck" ,rust-heck-0.3)
          ("rust-itertools" ,rust-itertools-0.10)
          ("rust-pkg-config" ,rust-pkg-config-0.3)
-         ("rust-strum" ,rust-strum-0.20)
-         ("rust-strum-macros" ,rust-strum-macros-0.20)
+         ("rust-strum" ,rust-strum-0.21)
+         ("rust-strum-macros" ,rust-strum-macros-0.21)
          ("rust-thiserror" ,rust-thiserror-1)
          ("rust-toml" ,rust-toml-0.5)
-         ("rust-version-compare"
-          ,rust-version-compare-0.0))))
+         ("rust-version-compare" ,rust-version-compare-0.0))))
     (home-page
       "https://github.com/gdesmott/system-deps")
     (synopsis
@@ -994,72 +856,6 @@ at once.  The reader internally keeps track of position within the buffer.
     (description
       "Discover and configure system dependencies from declarative dependencies in Cargo.toml")
     (license (list license:expat license:asl2.0))))
-
-(define-public rust-shlex-1
-  (package
-    (name "rust-shlex")
-    (version "1.0.0")
-    (source
-      (origin
-        (method url-fetch)
-        (uri (crate-uri "shlex" version))
-        (file-name
-          (string-append name "-" version ".tar.gz"))
-        (sha256
-          (base32
-            "0gf773p2snqpw69rzh8s1wdlq8dc8c1ypmiv516il1fdyb46i9a2"))))
-    (build-system cargo-build-system)
-    (arguments `(#:skip-build? #t))
-    (home-page "https://github.com/comex/rust-shlex")
-    (synopsis
-      "Split a string into shell words, like Python's shlex.
-")
-    (description
-      "Split a string into shell words, like Python's shlex.
-")
-    (license (list license:expat license:asl2.0))))
-
-(define-public rust-bindgen-0.58
-  (package
-    (name "rust-bindgen")
-    (version "0.58.1")
-    (source
-      (origin
-        (method url-fetch)
-        (uri (crate-uri "bindgen" version))
-        (file-name
-          (string-append name "-" version ".tar.gz"))
-        (sha256
-          (base32
-            "13r505nn28ay0byfd96hdg8xwcpa2r20czjy111pl66p22s2718g"))))
-    (build-system cargo-build-system)
-    (arguments
-      `(#:skip-build?
-        #t
-        #:cargo-inputs
-        (("rust-bitflags" ,rust-bitflags-1)
-         ("rust-cexpr" ,rust-cexpr-0.4)
-         ("rust-clang-sys" ,rust-clang-sys-1)
-         ("rust-clap" ,rust-clap-2)
-         ("rust-env-logger" ,rust-env-logger-0.8)
-         ("rust-lazy-static" ,rust-lazy-static-1)
-         ("rust-lazycell" ,rust-lazycell-1)
-         ("rust-log" ,rust-log-0.4)
-         ("rust-peeking-take-while"
-          ,rust-peeking-take-while-0.1)
-         ("rust-proc-macro2" ,rust-proc-macro2-1)
-         ("rust-quote" ,rust-quote-1)
-         ("rust-regex" ,rust-regex-1)
-         ("rust-rustc-hash" ,rust-rustc-hash-1)
-         ("rust-shlex" ,rust-shlex-1)
-         ("rust-which" ,rust-which-3))))
-    (home-page
-      "https://rust-lang.github.io/rust-bindgen/")
-    (synopsis
-      "Automatically generates Rust FFI bindings to C and C++ libraries.")
-    (description
-      "Automatically generates Rust FFI bindings to C and C++ libraries.")
-    (license license:bsd-3)))
 
 (define-public rust-dav1d-sys-0.3
   (package
@@ -1371,146 +1167,6 @@ at once.  The reader internally keeps track of position within the buffer.
       "Helps parsing and evaluating binary expression trees")
     (license license:expat)))
 
-(define-public rust-crunchy-0.2
-  (package
-    (name "rust-crunchy")
-    (version "0.2.2")
-    (source
-      (origin
-        (method url-fetch)
-        (uri (crate-uri "crunchy" version))
-        (file-name
-          (string-append name "-" version ".tar.gz"))
-        (sha256
-          (base32
-            "1dx9mypwd5mpfbbajm78xcrg5lirqk7934ik980mmaffg3hdm0bs"))))
-    (build-system cargo-build-system)
-    (arguments `(#:skip-build? #t))
-    (home-page "")
-    (synopsis
-      "Crunchy unroller: deterministically unroll constant loops")
-    (description
-      "Crunchy unroller: deterministically unroll constant loops")
-    (license license:expat)))
-
-(define-public rust-tiny-keccak-2
-  (package
-    (name "rust-tiny-keccak")
-    (version "2.0.2")
-    (source
-      (origin
-        (method url-fetch)
-        (uri (crate-uri "tiny-keccak" version))
-        (file-name
-          (string-append name "-" version ".tar.gz"))
-        (sha256
-          (base32
-            "0dq2x0hjffmixgyf6xv9wgsbcxkd65ld0wrfqmagji8a829kg79c"))))
-    (build-system cargo-build-system)
-    (arguments
-      `(#:skip-build?
-        #t
-        #:cargo-inputs
-        (("rust-crunchy" ,rust-crunchy-0.2))))
-    (home-page
-      "https://github.com/debris/tiny-keccak")
-    (synopsis
-      "An implementation of Keccak derived functions.")
-    (description
-      "An implementation of Keccak derived functions.")
-    (license license:cc0)))
-
-(define-public rust-const-random-macro-0.1
-  (package
-    (name "rust-const-random-macro")
-    (version "0.1.13")
-    (source
-      (origin
-        (method url-fetch)
-        (uri (crate-uri "const-random-macro" version))
-        (file-name
-          (string-append name "-" version ".tar.gz"))
-        (sha256
-          (base32
-            "0h7vvskw1pw5x44sbl74gsi8ydvrj5kaixpjqzxvz8h0s0knwpv1"))))
-    (build-system cargo-build-system)
-    (arguments
-      `(#:skip-build?
-        #t
-        #:cargo-inputs
-        (("rust-getrandom" ,rust-getrandom-0.2)
-         ("rust-lazy-static" ,rust-lazy-static-1)
-         ("rust-proc-macro-hack"
-          ,rust-proc-macro-hack-0.5)
-         ("rust-tiny-keccak" ,rust-tiny-keccak-2))))
-    (home-page
-      "https://github.com/tkaitchuck/constrandom")
-    (synopsis
-      "Provides the procedural macro used by const-random")
-    (description
-      "This package provides the procedural macro used by const-random")
-    (license (list license:expat license:asl2.0))))
-
-(define-public rust-const-random-0.1
-  (package
-    (name "rust-const-random")
-    (version "0.1.13")
-    (source
-      (origin
-        (method url-fetch)
-        (uri (crate-uri "const-random" version))
-        (file-name
-          (string-append name "-" version ".tar.gz"))
-        (sha256
-          (base32
-            "1i3pmhmmcdw3rr1pv1p9yhm4danm5r156cpy7w30pa0s05fxk47m"))))
-    (build-system cargo-build-system)
-    (arguments
-      `(#:skip-build?
-        #t
-        #:cargo-inputs
-        (("rust-const-random-macro"
-          ,rust-const-random-macro-0.1)
-         ("rust-proc-macro-hack"
-          ,rust-proc-macro-hack-0.5))))
-    (home-page
-      "https://github.com/tkaitchuck/constrandom")
-    (synopsis
-      "Provides compile time random number generation.")
-    (description
-      "This package provides compile time random number generation.")
-    (license (list license:expat license:asl2.0))))
-
-(define-public rust-ahash-0.7
-  (package
-    (name "rust-ahash")
-    (version "0.7.4")
-    (source
-      (origin
-        (method url-fetch)
-        (uri (crate-uri "ahash" version))
-        (file-name
-          (string-append name "-" version ".tar.gz"))
-        (sha256
-          (base32
-            "163vy6jcd7r3jczsv4zyhlc5x9dqsfgg1yrqbm3xhygr1czq7fs3"))))
-    (build-system cargo-build-system)
-    (arguments
-      `(#:skip-build?
-        #t
-        #:cargo-inputs
-        (("rust-const-random" ,rust-const-random-0.1)
-         ("rust-getrandom" ,rust-getrandom-0.2)
-         ("rust-once-cell" ,rust-once-cell-1)
-         ("rust-serde" ,rust-serde-1)
-         ("rust-version-check" ,rust-version-check-0.9))))
-    (home-page "https://github.com/tkaitchuck/ahash")
-    (synopsis
-      "A non-cryptographic hash function using AES-NI for high performance")
-    (description
-      "This package provides a non-cryptographic hash function using AES-NI for high performance")
-    (license (list license:expat license:asl2.0))))
-
 (define-public rust-broot-1
   (package
     (name "rust-broot")
@@ -1548,7 +1204,7 @@ at once.  The reader internally keeps track of position within the buffer.
          ("rust-glob" ,rust-glob-0.3)
          ("rust-id-arena" ,rust-id-arena-2)
          ("rust-image" ,rust-image-0.23)
-         ("rust-is-executable" ,rust-is-executable)
+         ("rust-is-executable" ,rust-is-executable-0.1)
          ("rust-lazy-regex" ,rust-lazy-regex-2)
          ("rust-lfs-core" ,rust-lfs-core-0.3)
          ("rust-libc" ,rust-libc-0.2)
