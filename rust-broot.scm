@@ -1,4 +1,5 @@
 (define-module (rust-broot)
+  #:use-module (rust-glassbench)
   #:use-module (guix build-system cargo)
   #:use-module (guix download)
   #:use-module (guix git-download)
@@ -34,232 +35,27 @@
   #:use-module (gnu packages xml)
   #:use-module (gnu packages xorg))
 
-(define-public rust-termimad-0.10
+(define-public rust-anyhow-1
   (package
-    (name "rust-termimad")
-    (version "0.10.3")
+    (name "rust-anyhow")
+    (version "1.0.51")
     (source
       (origin
         (method url-fetch)
-        (uri (crate-uri "termimad" version))
+        (uri (crate-uri "anyhow" version))
         (file-name (string-append name "-" version ".tar.gz"))
         (sha256
-          (base32 "11fpbq6fsbl8ghy7ip2jz7lwi79zmnrba2cnawmm7y26xqmwc30s"))))
+          (base32 "00r2sqapgjkfjbnf27fn8hxj2a25svcmvqar283vclsz64pp09lb"))))
     (build-system cargo-build-system)
     (arguments
       `(#:skip-build?
         #t
         #:cargo-inputs
-        (("rust-crossbeam" ,rust-crossbeam-0.8)
-         ("rust-crossterm" ,rust-crossterm-0.19)
-         ("rust-lazy-static" ,rust-lazy-static-1)
-         ("rust-minimad" ,rust-minimad-0.7)
-         ("rust-thiserror" ,rust-thiserror-1)
-         ("rust-unicode-width" ,rust-unicode-width-0.1))))
-    (home-page "https://github.com/Canop/termimad")
-    (synopsis "Markdown Renderer for the Terminal")
-    (description "Markdown Renderer for the Terminal")
-    (license license:expat)))
-
-(define-public rust-minimad-0.7
-  (package
-    (name "rust-minimad")
-    (version "0.7.1")
-    (source
-      (origin
-        (method url-fetch)
-        (uri (crate-uri "minimad" version))
-        (file-name (string-append name "-" version ".tar.gz"))
-        (sha256
-          (base32 "04xyphcr9iv4ilrscqwai8rwr5ipm4nzwbijjpp580dbav8ns5y6"))))
-    (build-system cargo-build-system)
-    (arguments
-      `(#:skip-build?
-        #t
-        #:cargo-inputs
-        (("rust-lazy-static" ,rust-lazy-static-1))))
-    (home-page "https://github.com/Canop/minimad")
-    (synopsis "light Markdown parser")
-    (description "light Markdown parser")
-    (license license:expat)))
-
-(define-public rust-svg-0.8
-  (package
-    (name "rust-svg")
-    (version "0.8.2")
-    (source
-      (origin
-        (method url-fetch)
-        (uri (crate-uri "svg" version))
-        (file-name (string-append name "-" version ".tar.gz"))
-        (sha256
-          (base32 "0b848rnm3mqr0c79zs15gqami9pp4m06yhhrjcimcrixb6j2bnrv"))))
-    (build-system cargo-build-system)
-    (arguments `(#:skip-build? #t))
-    (home-page "https://github.com/bodoni/svg")
-    (synopsis "The package provides an SVG composer and parser.")
-    (description "The package provides an SVG composer and parser.")
-    (license (list license:asl2.0 license:expat))))
-
-(define-public rust-cli-log-0.1
-  (package
-    (name "rust-cli-log")
-    (version "0.1.0")
-    (source
-      (origin
-        (method url-fetch)
-        (uri (crate-uri "cli-log" version))
-        (file-name (string-append name "-" version ".tar.gz"))
-        (sha256
-          (base32 "1kz6ilkymjn4bvsjrryfsykr3bwj1i0rjd4q7qmqjx90k7r76xpl"))))
-    (build-system cargo-build-system)
-    (arguments
-      `(#:skip-build?
-        #t
-        #:cargo-inputs
-        (("rust-chrono" ,rust-chrono-0.4) ("rust-log" ,rust-log-0.4))))
-    (home-page "https://github.com/Canop/cli-log")
-    (synopsis
-      "a simple logging and timing facility configured with an env variable")
-    (description
-      "a simple logging and timing facility configured with an env variable")
-    (license license:expat)))
-
-(define-public rust-argh-shared-0.1
-  (package
-    (name "rust-argh-shared")
-    (version "0.1.6")
-    (source
-      (origin
-        (method url-fetch)
-        (uri (crate-uri "argh_shared" version))
-        (file-name (string-append name "-" version ".tar.gz"))
-        (sha256
-          (base32 "0crzkzr4mq9gyys3m0idgsfwwrwd4dk70scp7rspvb2fmgd01piq"))))
-    (build-system cargo-build-system)
-    (arguments `(#:skip-build? #t))
-    (home-page "https://github.com/google/argh")
-    (synopsis "Derive-based argument parsing optimized for code size")
-    (description "Derive-based argument parsing optimized for code size")
-    (license license:bsd-3)))
-
-(define-public rust-argh-derive-0.1
-  (package
-    (name "rust-argh-derive")
-    (version "0.1.6")
-    (source
-      (origin
-        (method url-fetch)
-        (uri (crate-uri "argh_derive" version))
-        (file-name (string-append name "-" version ".tar.gz"))
-        (sha256
-          (base32 "13qz9i9frdjl1v9aqw5b2cs7wn3h34x2xkpsi9wcl1hcpjd23ba8"))))
-    (build-system cargo-build-system)
-    (arguments
-      `(#:skip-build?
-        #t
-        #:cargo-inputs
-        (("rust-argh-shared" ,rust-argh-shared-0.1)
-         ("rust-heck" ,rust-heck-0.3)
-         ("rust-proc-macro2" ,rust-proc-macro2-1)
-         ("rust-quote" ,rust-quote-1)
-         ("rust-syn" ,rust-syn-1))))
-    (home-page "https://github.com/google/argh")
-    (synopsis "Derive-based argument parsing optimized for code size")
-    (description "Derive-based argument parsing optimized for code size")
-    (license license:bsd-3)))
-
-(define-public rust-argh-0.1
-  (package
-    (name "rust-argh")
-    (version "0.1.6")
-    (source
-      (origin
-        (method url-fetch)
-        (uri (crate-uri "argh" version))
-        (file-name (string-append name "-" version ".tar.gz"))
-        (sha256
-          (base32 "1gy9y69d38q7f5147kj823swgggc3m30x7z2z1lrjpwpsxncf8zh"))))
-    (build-system cargo-build-system)
-    (arguments
-      `(#:skip-build?
-        #t
-        #:cargo-inputs
-        (("rust-argh-derive" ,rust-argh-derive-0.1)
-         ("rust-argh-shared" ,rust-argh-shared-0.1))))
-    (home-page "https://github.com/google/argh")
-    (synopsis "Derive-based argument parser optimized for code size")
-    (description "Derive-based argument parser optimized for code size")
-    (license license:bsd-3)))
-
-(define-public rust-csv2svg-0.1
-  (package
-    (name "rust-csv2svg")
-    (version "0.1.5")
-    (source
-      (origin
-        (method url-fetch)
-        (uri (crate-uri "csv2svg" version))
-        (file-name (string-append name "-" version ".tar.gz"))
-        (sha256
-          (base32 "18rcj44s23rq4px2ab1z3pp9wxxsm2jjzvcb966h12nw7669pcpi"))))
-    (build-system cargo-build-system)
-    (arguments
-      `(#:skip-build?
-        #t
-        #:cargo-inputs
-        (("rust-anyhow" ,rust-anyhow-1)
-         ("rust-argh" ,rust-argh-0.1)
-         ("rust-chrono" ,rust-chrono-0.4)
-         ("rust-cli-log" ,rust-cli-log-0.1)
-         ("rust-csv" ,rust-csv-1)
-         ("rust-directories-next" ,rust-directories-next-2)
-         ("rust-libc" ,rust-libc-0.2)
-         ("rust-log" ,rust-log-0.4)
-         ("rust-num-traits" ,rust-num-traits-0.2)
-         ("rust-open" ,rust-open-1)
-         ("rust-svg" ,rust-svg-0.8)
-         ("rust-tempfile" ,rust-tempfile-3))))
-    (home-page "https://github.com/Canop/csv2svg")
-    (synopsis "take a csv as input and outputs svg")
-    (description "take a csv as input and outputs svg")
-    (license license:expat)))
-
-(define-public rust-glassbench-0.3
-  (package
-    (name "rust-glassbench")
-    (version "0.3.0")
-    (source
-      (origin
-        (method url-fetch)
-        (uri (crate-uri "glassbench" version))
-        (file-name (string-append name "-" version ".tar.gz"))
-        (sha256
-          (base32 "07w7pn4vv6js8dmfwkk10r4nqxv4js2fzbwiq57n5w67f49qgx03"))))
-    (build-system cargo-build-system)
-    (arguments
-      `(#:skip-build?
-        #t
-        #:cargo-inputs
-        (("rust-base64" ,rust-base64-0.13)
-         ("rust-chrono" ,rust-chrono-0.4)
-         ("rust-crossterm" ,rust-crossterm-0.19)
-         ("rust-csv2svg" ,rust-csv2svg-0.1)
-         ("rust-git2" ,rust-git2-0.13)
-         ("rust-lazy-static" ,rust-lazy-static-1)
-         ("rust-minimad" ,rust-minimad-0.7)
-         ("rust-open" ,rust-open-1)
-         ("rust-rusqlite" ,rust-rusqlite-0.24)
-         ("rust-serde" ,rust-serde-1)
-         ("rust-serde-json" ,rust-serde-json-1)
-         ("rust-svg" ,rust-svg-0.8)
-         ("rust-tempfile" ,rust-tempfile-3)
-         ("rust-termimad" ,rust-termimad-0.10)
-         ("rust-thiserror" ,rust-thiserror-1))))
-    (home-page "https://github.com/Canop/glassbench")
-    (synopsis "rust benchmark with memory")
-    (description "rust benchmark with memory")
-    (license license:expat)))
+        (("rust-backtrace" ,rust-backtrace-0.3))))
+    (home-page "https://github.com/dtolnay/anyhow")
+    (synopsis "Flexible concrete Error type built on std::error::Error")
+    (description "Flexible concrete Error type built on std::error::Error")
+    (license (list license:expat license:asl2.0))))
 
 (define-public rust-termux-clipboard-0.1
   (package
@@ -303,24 +99,24 @@
     (description "a minimal cross-platform clipboard")
     (license license:expat)))
 
-(define-public rust-termimad-0.11
+(define-public rust-termimad-0.14
   (package
     (name "rust-termimad")
-    (version "0.11.1")
+    (version "0.14.3")
     (source
       (origin
         (method url-fetch)
         (uri (crate-uri "termimad" version))
         (file-name (string-append name "-" version ".tar.gz"))
         (sha256
-          (base32 "16y0n9kfbzvbq1abmnjfksb4gklzyv9q6w4y1h1jmkl4269djwrd"))))
+          (base32 "0vhkf9ysa30ly0i3f0jygsr9a7m9pmflxa4bin4i1hxf5ra6xsni"))))
     (build-system cargo-build-system)
     (arguments
       `(#:skip-build?
         #t
         #:cargo-inputs
         (("rust-crossbeam" ,rust-crossbeam-0.8)
-         ("rust-crossterm" ,rust-crossterm-0.19)
+         ("rust-crossterm" ,rust-crossterm-0.20)
          ("rust-minimad" ,rust-minimad-0.8)
          ("rust-thiserror" ,rust-thiserror-1)
          ("rust-unicode-width" ,rust-unicode-width-0.1))))
@@ -409,17 +205,17 @@
     (description "light Markdown parser")
     (license license:expat)))
 
-(define-public rust-lfs-core-0.3
+(define-public rust-lfs-core-0.4
   (package
     (name "rust-lfs-core")
-    (version "0.3.4")
+    (version "0.4.2")
     (source
       (origin
         (method url-fetch)
         (uri (crate-uri "lfs-core" version))
         (file-name (string-append name "-" version ".tar.gz"))
         (sha256
-          (base32 "07l0cd85l70fkf1009lqa7129329g22i32sq8xzvnp4sr6zmj5xz"))))
+          (base32 "0b13biijyg517zniwnnmhg70j81v8jbagsyrzi8jpcampm91kw6x"))))
     (build-system cargo-build-system)
     (arguments
       `(#:skip-build?
@@ -436,14 +232,14 @@
 (define-public rust-lazy-regex-proc-macros-2
   (package
     (name "rust-lazy-regex-proc-macros")
-    (version "2.2.1")
+    (version "2.2.2")
     (source
       (origin
         (method url-fetch)
         (uri (crate-uri "lazy-regex-proc_macros" version))
         (file-name (string-append name "-" version ".tar.gz"))
         (sha256
-          (base32 "0kpqhhs2p9zn2q4cfjz30vkwgl4znwapwlj057i5pkwj3f5r64kc"))))
+          (base32 "0dkf94rpg55kfwfc5vsvjn5rpvbmgq0da9b6jw3irxaal3q6pgjz"))))
     (build-system cargo-build-system)
     (arguments
       `(#:skip-build?
@@ -461,14 +257,14 @@
 (define-public rust-lazy-regex-2
   (package
     (name "rust-lazy-regex")
-    (version "2.2.1")
+    (version "2.2.2")
     (source
       (origin
         (method url-fetch)
         (uri (crate-uri "lazy-regex" version))
         (file-name (string-append name "-" version ".tar.gz"))
         (sha256
-          (base32 "0m2anc6knp9dndkyqqf7bd7dly7p3is5vgf0ln4fgxkj2bwril8p"))))
+          (base32 "0g9bksfbb9m53yjkmql00yxmablk200lcn7wjmzf4bdz7rvid6li"))))
     (build-system cargo-build-system)
     (arguments
       `(#:skip-build?
@@ -501,40 +297,17 @@
     (description "Is there an executable file at the given path?")
     (license (list license:asl2.0 license:expat))))
 
-(define-public rust-fallible-collections-0.3
-  (package
-    (name "rust-fallible-collections")
-    (version "0.3.1")
-    (source
-      (origin
-        (method url-fetch)
-        (uri (crate-uri "fallible_collections" version))
-        (file-name (string-append name "-" version ".tar.gz"))
-        (sha256
-          (base32 "1shgcljh6pliv1b1qk6knk2hzig5ah76hx01f1icpgkiqp6fi6cm"))))
-    (build-system cargo-build-system)
-    (arguments
-      `(#:skip-build?
-        #t
-        #:cargo-inputs
-        (("rust-hashbrown" ,rust-hashbrown-0.9))))
-    (home-page "https://github.com/vcombey/fallible_collections.git")
-    (synopsis "a crate which adds fallible allocation api to std collections")
-    (description
-      "a crate which adds fallible allocation api to std collections")
-    (license (list license:expat license:asl2.0))))
-
 (define-public rust-mp4parse-0.11
   (package
     (name "rust-mp4parse")
-    (version "0.11.5")
+    (version "0.11.6")
     (source
       (origin
         (method url-fetch)
         (uri (crate-uri "mp4parse" version))
         (file-name (string-append name "-" version ".tar.gz"))
         (sha256
-          (base32 "1wwkkjrf2p9qy58sa5pa9wqlfhd36zcp8h0lgrz9l5pgkr89b6yk"))))
+          (base32 "0rd35ml4mm4xmz3n95wn5b4sgrj80q9i300759hzx1wiy2rrgsk0"))))
     (build-system cargo-build-system)
     (arguments
       `(#:skip-build?
@@ -543,8 +316,7 @@
         (("rust-bitreader" ,rust-bitreader-0.3)
          ("rust-byteorder" ,rust-byteorder-1)
          ("rust-env-logger" ,rust-env-logger-0.8)
-         ("rust-fallible-collections" ,rust-fallible-collections-0.3)
-         ("rust-hashbrown" ,rust-hashbrown-0.9)
+         ("rust-fallible-collections" ,rust-fallible-collections-0.4)
          ("rust-log" ,rust-log-0.4)
          ("rust-num-traits" ,rust-num-traits-0.2)
          ("rust-static-assertions" ,rust-static-assertions-1))))
@@ -592,53 +364,6 @@
     (home-page "https://github.com/aws/dcv-color-primitives")
     (synopsis "a library to perform image color model conversion")
     (description "a library to perform image color model conversion")
-    (license license:expat)))
-
-(define-public rust-strum-macros-0.21
-  (package
-    (name "rust-strum-macros")
-    (version "0.21.1")
-    (source
-      (origin
-        (method url-fetch)
-        (uri (crate-uri "strum_macros" version))
-        (file-name (string-append name "-" version ".tar.gz"))
-        (sha256
-          (base32 "1v55b1in7dn07s6vxr8dajqpvxkxjbfq6qamnjgcbnq9x3pawsnh"))))
-    (build-system cargo-build-system)
-    (arguments
-      `(#:skip-build?
-        #t
-        #:cargo-inputs
-        (("rust-heck" ,rust-heck-0.3)
-         ("rust-proc-macro2" ,rust-proc-macro2-1)
-         ("rust-quote" ,rust-quote-1)
-         ("rust-syn" ,rust-syn-1))))
-    (home-page "https://github.com/Peternator7/strum")
-    (synopsis "Helpful macros for working with enums and strings")
-    (description "Helpful macros for working with enums and strings")
-    (license license:expat)))
-
-(define-public rust-strum-0.21
-  (package
-    (name "rust-strum")
-    (version "0.21.0")
-    (source
-      (origin
-        (method url-fetch)
-        (uri (crate-uri "strum" version))
-        (file-name (string-append name "-" version ".tar.gz"))
-        (sha256
-          (base32 "1qnd2by1zrwgx7li0hmwy7jbzjwz1ky697qjg85nga8zzny6py5a"))))
-    (build-system cargo-build-system)
-    (arguments
-      `(#:skip-build?
-        #t
-        #:cargo-inputs
-        (("rust-strum-macros" ,rust-strum-macros-0.21))))
-    (home-page "https://github.com/Peternator7/strum")
-    (synopsis "Helpful macros for working with enums and strings")
-    (description "Helpful macros for working with enums and strings")
     (license license:expat)))
 
 (define-public rust-target-lexicon-0.12
@@ -713,7 +438,8 @@
     (synopsis
       "Discover and configure system dependencies from declarative dependencies in Cargo.toml")
     (description
-      "Discover and configure system dependencies from declarative dependencies in Cargo.toml")
+      "Discover and configure system dependencies from declarative dependencies in
+Cargo.toml")
     (license (list license:expat license:asl2.0))))
 
 (define-public rust-dav1d-sys-0.3
@@ -797,7 +523,8 @@
     (synopsis
       "Imaging library written in Rust. Provides basic filters and decoders for the most common image formats.")
     (description
-      "Imaging library written in Rust.  Provides basic filters and decoders for the most common image formats.")
+      "Imaging library written in Rust.  Provides basic filters and decoders for the
+most common image formats.")
     (license license:expat)))
 
 (define-public rust-id-arena-2
@@ -946,14 +673,14 @@
 (define-public rust-char-reader-0.1
   (package
     (name "rust-char-reader")
-    (version "0.1.0")
+    (version "0.1.1")
     (source
       (origin
         (method url-fetch)
         (uri (crate-uri "char_reader" version))
         (file-name (string-append name "-" version ".tar.gz"))
         (sha256
-          (base32 "01qsxd27jq8xhg0vbsiqdd92lyjdr56wlvgb487vdb97694ngaid"))))
+          (base32 "0fpdhx6061a92fj3kw11rwv2zkdlx8z59gbkq7baf762vqi9p99p"))))
     (build-system cargo-build-system)
     (arguments `(#:skip-build? #t))
     (home-page "https://github.com/Canop/char_reader")
@@ -982,14 +709,14 @@
 (define-public rust-broot-1
   (package
     (name "rust-broot")
-    (version "1.6.1")
+    (version "1.6.2")
     (source
       (origin
         (method url-fetch)
         (uri (crate-uri "broot" version))
         (file-name (string-append name "-" version ".tar.gz"))
         (sha256
-          (base32 "00hlp0lmld4lcqgp1pqxzkiz0wby91lnn2gbff2aznv10ghpp050"))))
+          (base32 "1kz6zf2m185437xyrh5i80x2s026jcpag7grjrz8akwi9sb1xw6d"))))
     (build-system cargo-build-system)
     (arguments
       `(#:cargo-inputs
@@ -1003,7 +730,7 @@
          ("rust-clap" ,rust-clap-2)
          ("rust-cli-log" ,rust-cli-log-2)
          ("rust-crossbeam" ,rust-crossbeam-0.8)
-         ("rust-crossterm" ,rust-crossterm-0.19)
+         ("rust-crossterm" ,rust-crossterm-0.20)
          ("rust-custom-error" ,rust-custom-error-1)
          ("rust-deser-hjson" ,rust-deser-hjson-1)
          ("rust-directories" ,rust-directories-3)
@@ -1015,7 +742,7 @@
          ("rust-image" ,rust-image-0.23)
          ("rust-is-executable" ,rust-is-executable-0.1)
          ("rust-lazy-regex" ,rust-lazy-regex-2)
-         ("rust-lfs-core" ,rust-lfs-core-0.3)
+         ("rust-lfs-core" ,rust-lfs-core-0.4)
          ("rust-libc" ,rust-libc-0.2)
          ("rust-memmap" ,rust-memmap-0.7)
          ("rust-minimad" ,rust-minimad-0.8)
@@ -1032,7 +759,7 @@
          ("rust-strict" ,rust-strict-0.1)
          ("rust-syntect" ,rust-syntect-4)
          ("rust-tempfile" ,rust-tempfile-3)
-         ("rust-termimad" ,rust-termimad-0.11)
+         ("rust-termimad" ,rust-termimad-0.14)
          ("rust-terminal-clipboard" ,rust-terminal-clipboard-0.2)
          ("rust-toml" ,rust-toml-0.5)
          ("rust-umask" ,rust-umask-1)
