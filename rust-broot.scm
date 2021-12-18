@@ -992,8 +992,7 @@
           (base32 "00hlp0lmld4lcqgp1pqxzkiz0wby91lnn2gbff2aznv10ghpp050"))))
     (build-system cargo-build-system)
     (arguments
-     `(#:rust ,rust-1.52
-       #:cargo-inputs
+      `(#:cargo-inputs
         (("rust-ahash" ,rust-ahash-0.7)
          ("rust-ansi-colours" ,rust-ansi-colours-1)
          ("rust-base64" ,rust-base64-0.13)
