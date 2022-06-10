@@ -11,22 +11,21 @@
 (define-public python-legendary-gl
   (package
    (name "python-legendary-gl")
-   (version "0.20.22")
+   (version "0.20.26")
    (source
     (origin
      (method url-fetch)
      (uri (pypi-uri "legendary-gl" version))
      (sha256
       (base32
-       "1gi5y9p4iw2i94l50nn1gaavmpzlbi3pkys0ilgs04w1x2f0cnyh"))))
+       "1ihngacyr3cqcg8ak9rhfqgvav4rx80xfwg4a5xbrvnnvbds6kds"))))
    (build-system python-build-system)
    (arguments
     `(#:tests? #f))
-   (inputs
-    `(("python-requests" ,python-requests)))
-   (native-inputs
-    `(("python-setuptools" ,python-setuptools)
-      ("python-wheel" ,python-wheel)))
+   (propagated-inputs (list
+		       python-requests
+		       python-setuptools
+		       python-wheel))
    (home-page "https://github.com/derrod/legendary")
    (synopsis
     "Free and open-source replacement for the Epic Games Launcher application")
