@@ -11,14 +11,14 @@
 (define-public python-legendary-gl
   (package
    (name "python-legendary-gl")
-   (version "0.20.27")
+   (version "0.20.32")
    (source
     (origin
      (method url-fetch)
      (uri (pypi-uri "legendary-gl" version))
      (sha256
       (base32
-       "0l5wqskxivvms9r9y6g3apc37l007pq2843nfqdpvdm38lxl8v7c"))))
+       "0mwwfky3xn2scrvf61jhgcc52bip6r705skayzw32jiqqhjbglpa"))))
    (build-system python-build-system)
    (arguments
     `(#:tests? #f))
