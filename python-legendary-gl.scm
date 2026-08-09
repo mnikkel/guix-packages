@@ -1,32 +1,39 @@
 (define-module (python-legendary-gl)
   #:use-module (guix licenses)
   #:use-module (guix packages)
-  #:use-module (guix build-system python)
+  #:use-module (guix build-system pyproject)
   #:use-module (guix download)
-  #:use-module (gnu packages python-xyz)
   #:use-module (gnu packages python-build)
-  #:use-module (gnu packages wine)
+  #:use-module (gnu packages python-crypto)
+  #:use-module (gnu packages python-xyz)
   #:use-module (gnu packages python-web))
 
 (define-public python-legendary-gl
   (package
    (name "python-legendary-gl")
-   (version "0.20.34")
+   (version "0.21.0")
    (source
     (origin
      (method url-fetch)
-     (uri (pypi-uri "legendary-gl" version))
+     ;; PyPI publishes this project's source distribution with an underscore.
+     (uri (string-append
+           "https://files.pythonhosted.org/packages/source/l/legendary-gl/"
+           "legendary_gl-" version ".tar.gz"))
      (sha256
       (base32
-       "04cn1sv5ks0cy085r9i26gddajxcc6mbqvygxlz1cp6dhbm8slis"))))
-   (build-system python-build-system)
+       "08km3fcwdc7pch8hyij05paj016as68ab1b87qjskla6n7f0ryc8"))))
+   (build-system pyproject-build-system)
    (arguments
-    `(#:tests? #f))
-   (propagated-inputs (list python-filelock python-requests python-setuptools
-                            python-wheel))
-   (home-page "https://github.com/derrod/legendary")
+    (list
+     ;; Upstream uses uv_build, which is not packaged in Guix.
+     #:build-backend "setuptools.build_meta"
+     #:tests? #f))
+   (native-inputs (list python-setuptools))
+   (propagated-inputs
+    (list python-filelock python-pycryptodomex python-requests))
+   (home-page "https://github.com/legendary-gl/legendary")
    (synopsis
     "Free and open-source replacement for the Epic Games Launcher application")
    (description
-    "Free and open-source replacement for the Epic Games Launcher application")
+    "Free and open-source replacement for the Epic Games Launcher application.")
    (license gpl3)))
