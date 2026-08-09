@@ -7,6 +7,7 @@
   #:use-module (guix packages)
   #:use-module (gnu packages base)
   #:use-module (gnu packages bash)
+  #:use-module (gnu packages gcc)
   #:use-module (gnu packages rust-apps))
 
 (define-public opencode
@@ -45,14 +46,18 @@
                             (string-append "#!~a~%"
                                            "export OPENCODE_DISABLE_AUTOUPDATE=true~%"
                                            "export PATH=~a${PATH:+:$PATH}~%"
-                                           "exec ~a --library-path ~a ~a \"$@\"~%")
+                                           "exec ~a --library-path ~a:~a ~a \"$@\"~%")
                             (search-input-file inputs "/bin/bash")
                             #$(file-append ripgrep "/bin")
                             (search-input-file inputs "/lib/ld-linux-x86-64.so.2")
                             #$(file-append glibc "/lib")
+                            (string-append (assoc-ref inputs "gcc:lib") "/lib")
                             program)))
                 (chmod wrapper #o555)))))))
-    (inputs (list bash-minimal glibc ripgrep))
+    (inputs `(("bash-minimal" ,bash-minimal)
+              ("gcc:lib" ,gcc "lib")
+              ("glibc" ,glibc)
+              ("ripgrep" ,ripgrep)))
     (supported-systems '("x86_64-linux"))
     (home-page "https://opencode.ai/")
     (synopsis "AI coding agent for the terminal")
