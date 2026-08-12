@@ -1,5 +1,5 @@
 (define-module (grok-build)
-  #:use-module (guix build-system trivial)
+  #:use-module (guix build-system copy)
   #:use-module (guix download)
   #:use-module (guix gexp)
   #:use-module (guix licenses)
@@ -9,7 +9,7 @@
 (define-public grok-build
   (package
     (name "grok-build")
-    (version "1.0.0")
+    (version "1.0.3")
     (source
      (origin
        (method url-fetch)
@@ -18,31 +18,48 @@
        (file-name (string-append name "-" version "-linux-x86_64"))
        (sha256
         (base32
-         "0gkwzkjs94hbfpfcirf7hpk58lxrpanlv0xnfhiswgc4lmkwknr8"))))
-    (build-system trivial-build-system)
+         "0q89i9k3vyzhg5i9kp28d1yh27j0bn1qn9bj81z0dvgvlgg4cz9a"))))
+    (build-system copy-build-system)
     (arguments
      (list
-      #:modules '((guix build utils))
-      #:builder
-      #~(begin
-          (use-modules (guix build utils))
-          (let* ((out #$output)
-                 (program (string-append out "/libexec/grok"))
-                 (wrapper (string-append out "/bin/grok")))
-            (mkdir-p (dirname program))
-            (copy-file #$source program)
-            (chmod program #o555)
-            (mkdir-p (dirname wrapper))
-            (call-with-output-file wrapper
-              (lambda (port)
-                (format port
-                        (string-append "#!~a~%"
-                                       "export GROK_AUTO_UPDATE=false~%"
-                                       "exec -a \"${0##*/}\" ~a \"$@\"~%")
-                        #$(file-append bash-minimal "/bin/bash")
-                        program)))
-            (chmod wrapper #o555)
-            (symlink "grok" (string-append out "/bin/agent"))))))
+      ;; Official static-pie binary; do not strip or rewrite its ELF headers.
+      #:strip-binaries? #f
+      #:install-plan
+      #~`((#$(string-append name "-" version "-linux-x86_64") "libexec/grok"))
+      #:phases
+      #~(modify-phases %standard-phases
+          (add-after 'install 'install-wrapper
+            (lambda* (#:key inputs #:allow-other-keys)
+              (let ((program (string-append #$output "/libexec/grok"))
+                    (wrapper (string-append #$output "/bin/grok")))
+                (chmod program #o555)
+                (mkdir-p (dirname wrapper))
+                ;; Preserve argv[0] so `grok` and the `agent` symlink stay
+                ;; distinct; Guix owns updates via GROK_AUTO_UPDATE.
+                (call-with-output-file wrapper
+                  (lambda (port)
+                    (format port "#!~a~%"
+                            (search-input-file inputs "/bin/bash"))
+                    (format port "export GROK_AUTO_UPDATE=false~%")
+                    (format port "exec -a \"${0##*/}\" ~a \"$@\"~%"
+                            program)))
+                (chmod wrapper #o555)
+                (symlink "grok" (string-append #$output "/bin/agent")))))
+          (add-after 'install-wrapper 'install-completions
+            (lambda _
+              (let ((program (string-append #$output "/libexec/grok")))
+                (setenv "HOME" (getcwd))
+                (setenv "GROK_AUTO_UPDATE" "false")
+                (for-each
+                 (lambda (spec)
+                   (let ((file (string-append #$output (cdr spec))))
+                     (mkdir-p (dirname file))
+                     (with-output-to-file file
+                       (lambda ()
+                         (invoke program "completions" (car spec))))))
+                 '(("bash" . "/share/bash-completion/completions/grok")
+                   ("zsh"  . "/share/zsh/site-functions/_grok")
+                   ("fish" . "/share/fish/vendor_completions.d/grok.fish")))))))))
     (inputs (list bash-minimal))
     (supported-systems '("x86_64-linux"))
     (home-page "https://x.ai/cli")
