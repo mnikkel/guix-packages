@@ -47,7 +47,7 @@
                     (format port "export OPENCODE_DISABLE_AUTOUPDATE=true~%")
                     (format port "export PATH=~a${PATH:+:$PATH}~%"
                             #$(file-append ripgrep "/bin"))
-                    (format port "exec ~a --library-path ~a:~a ~a \"$@\"~%"
+                    (format port "exec -a opencode ~a --library-path ~a:~a ~a \"$@\"~%"
                             (search-input-file inputs
                                               "/lib/ld-linux-x86-64.so.2")
                             #$(file-append glibc "/lib")
