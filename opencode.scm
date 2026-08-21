@@ -12,7 +12,7 @@
 (define-public opencode
   (package
     (name "opencode")
-    (version "1.18.17")
+    (version "1.18.21")
     (source
      (origin
        (method url-fetch)
@@ -22,7 +22,7 @@
        (file-name (string-append name "-" version "-linux-x64.tar.gz"))
        (sha256
         (base32
-         "0jhlzqx30ilfv4x4bym6xf1rdqb45qhisgckdlxhssvz3k3a851z"))))
+         "12mkjnljc15bk4qhwivb79ymphhwshald418lf8mgfqkfvnw646r"))))
     (build-system copy-build-system)
     (arguments
      (list
