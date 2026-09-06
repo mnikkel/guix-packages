@@ -9,7 +9,7 @@
 (define-public grok-build
   (package
     (name "grok-build")
-    (version "1.0.5")
+    (version "1.0.13")
     (source
      (origin
        (method url-fetch)
@@ -18,7 +18,7 @@
        (file-name (string-append name "-" version "-linux-x86_64"))
        (sha256
         (base32
-         "0f3jczmc89m970f3wp5ah11j0347d9kz9fxd0ihqz7l1w5279a4v"))))
+         "1hg4vhq0sa3ax3mkgqm31n32wx3a394liy5ybawydd8vb0hrbxzd"))))
     (build-system copy-build-system)
     (arguments
      (list
